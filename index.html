@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
 
     <style type="text/css">
-        @media (min-width: 768px) {
+        @media (min-width: 992px) {
             .container {
-                width: 750px;
+                width: 970px;
             }
         }
         .error {
@@ -25,184 +25,203 @@
 </head>
 <body>
     <div class="container" ng-controller="StatsController">
-        <div class="row">
-            <div class="col-xs-3">
-                <select class="form-control" ng-options="race.label for race in races" ng-model="selectedRace" ng-model="selectedRace" ng-change="changeRace()"></select>
+        <form class="form-inline">
+            <div class="row">
+                <div class="col-xs-12">
+                        <div class="form-group">
+                            <select class="form-control" ng-options="race.label for race in races" ng-model="selectedRace" ng-model="selectedRace" ng-change="changeRace()"></select>
+                        </div>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-1 col-xs-offset-3">
-                <p class="text-center">Base</p>
+            <div class="row">
+                <div class="col-xs-1 col-xs-offset-3">
+                    <p class="text-center">Base</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center hidden-xs" ng-class="modError ? 'error' : ''">Racial modifier</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">Final</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center hidden-xs">Modifier</p>
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center" ng-class="modError ? 'error' : ''">Racial mod</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Strength</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.str}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.str" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.str}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.str}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.str > 0)">+</span>{{mods.str}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('str')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('str')">
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center">Final</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Dexterity</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.dex}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.dex" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.dex}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.dex}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.dex > 0)">+</span>{{mods.dex}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('dex')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('dex')">
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center">Mod</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Constitution</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.con}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.con" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.con}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.con}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.con > 0)">+</span>{{mods.con}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('con')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('con')">
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Strength</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Intelligence</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.int}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.int" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.int}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.int}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.int > 0)">+</span>{{mods.int}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('int')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('int')">
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.str}}</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Wisdom</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.wis}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.wis" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.wis}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.wis}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.wis > 0)">+</span>{{mods.wis}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('wis')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('wis')">
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.str" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.str}}
-                </p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <p class="lead">Charisma</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{stats.cha}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.cha" ng-true-value="1" ng-false-value="0" value="">
+                        {{selectedRace.stats.cha}}
+                    </p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center lead">{{modifiedStats.cha}}</p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center">
+                        <span ng-show="(mods.cha > 0)">+</span>{{mods.cha}}
+                    </p>
+                </div>
+                <div class="col-xs-5">
+                    <input class="btn btn-primary btn-sm" type="button" value="Lower" ng-click="dec('cha')">
+                    <input class="btn btn-info btn-sm" type="button" value="Higher" ng-click="inc('cha')">
+                </div>
             </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.str}}</p>
+            <div class="row">
+                <div class="col-xs-3">
+                    <em ng-class="(points < 0) ? 'error' : ''">Remaining</em>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center" ng-class="(points < 0) ? 'error' : ''"><em>{{points}}</em></p>
+                </div>
+                <div class="col-xs-1">
+                    <p class="text-center error visible-xs " ng-show="modError">X</p>
+                </div>
             </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.str > 0)">+</span>{{mods.str}}
+            <div class="row">
+                <div class="col-xs-4 col-xs-offset-3">
+                    <p class="text-center">
+                        <input class="btn btn-danger" type="button" value="Reset" ng-click="reset()">
+                    </p>
+                </div>
             </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('str')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('str')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Dexterity</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.dex}}</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.dex" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.dex}}
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.dex}}</p>
-            </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.dex > 0)">+</span>{{mods.dex}}
-            </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('dex')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('dex')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Constitution</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.con}}</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.con" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.con}}
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.con}}</p>
-            </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.con > 0)">+</span>{{mods.con}}
-            </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('con')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('con')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Intelligence</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.int}}</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.int" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.int}}
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.int}}</p>
-            </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.int > 0)">+</span>{{mods.int}}
-            </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('int')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('int')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Wisdom</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.wis}}</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.wis" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.wis}}
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.wis}}</p>
-            </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.wis > 0)">+</span>{{mods.wis}}
-            </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('wis')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('wis')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <p class="lead">Charisma</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{stats.cha}}</p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center">
-                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.cha" ng-true-value="1" ng-false-value="0" value="">
-                    {{selectedRace.stats.cha}}
-                </p>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-center lead">{{modifiedStats.cha}}</p>
-            </div>
-            <div class="col-xs-1">
-                <span ng-show="(mods.cha > 0)">+</span>{{mods.cha}}
-            </div>
-            <div class="col-xs-5">
-                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('cha')">
-                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('cha')">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-3">
-                <em ng-class="(points < 0) ? 'error' : ''">Remaining</em>
-            </div>
-            <div class="col-xs-1">
-                <p class="text-right" ng-class="(points < 0) ? 'error' : ''"><em>{{points}}</em></p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-4 col-xs-offset-3">
-                <p class="text-center">
-                <input class="btn btn-danger" type="button" value="Reset" ng-click="reset()">
-                </p>
-            </div>
-        </div>
+        </form>
     </div>
 </body>
 </html>
