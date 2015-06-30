@@ -40,6 +40,9 @@
             <div class="col-xs-1">
                 <p class="text-center">Final</p>
             </div>
+            <div class="col-xs-1">
+                <p class="text-center">Mod</p>
+            </div>
         </div>
         <div class="row">
             <div class="col-xs-3">
@@ -54,7 +57,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.str}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.str > 0)">+</span>{{mods.str}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('str')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('str')">
             </div>
@@ -72,7 +78,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.dex}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.dex > 0)">+</span>{{mods.dex}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('dex')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('dex')">
             </div>
@@ -90,7 +99,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.con}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.con > 0)">+</span>{{mods.con}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('con')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('con')">
             </div>
@@ -108,7 +120,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.int}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.int > 0)">+</span>{{mods.int}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('int')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('int')">
             </div>
@@ -126,7 +141,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.wis}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.wis > 0)">+</span>{{mods.wis}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('wis')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('wis')">
             </div>
@@ -144,7 +162,10 @@
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.cha}}</p>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-1">
+                <span ng-show="(mods.cha > 0)">+</span>{{mods.cha}}
+            </div>
+            <div class="col-xs-5">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('cha')">
                 <input class="btn btn-info" type="button" value="Higher" ng-click="inc('cha')">
             </div>
@@ -153,12 +174,12 @@
             <div class="col-xs-3">
                 <em ng-class="(points < 0) ? 'error' : ''">Remaining</em>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-right" ng-class="(points < 0) ? 'error' : ''"><em>{{points}}</em></p>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-3 col-xs-offset-3">
+            <div class="col-xs-4 col-xs-offset-3">
                 <p class="text-center">
                 <input class="btn btn-danger" type="button" value="Reset" ng-click="reset()">
                 </p>
