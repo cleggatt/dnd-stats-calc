@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="statsApp">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>D&D statistic calulator</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+    <style type="text/css">
+        @media (min-width: 768px) {
+            .container {
+                width: 750px;
+            }
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script type="text/javascript" src="ngmodule.js"></script>
+</head>
+<body>
+    <div class="container" ng-controller="StatsController">
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Strength</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.str}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('str')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('str')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Dexterity</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.dex}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('dex')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('dex')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Constitution</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.con}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('con')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('con')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Intelligence</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.int}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('int')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('int')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Wisdom</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.wis}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('wis')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('wis')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <p class="lead">Charisma</p>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-center lead">{{stats.cha}}</p>
+            </div>
+            <div class="col-xs-6">
+                <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('cha')">
+                <input class="btn btn-info" type="button" value="Higher" ng-click="inc('cha')">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
+                <em ng-class="(points < 0) ? 'error' : ''">Remaining</em>
+            </div>
+            <div class="col-xs-3">
+                <p class="text-right" ng-class="(points < 0) ? 'error' : ''"><em>{{points}}</em></p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3 col-xs-offset-3">
+                <p class="text-center">
+                <input class="btn btn-danger" type="button" value="Reset" ng-click="reset()">
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
