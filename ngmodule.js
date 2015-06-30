@@ -1,6 +1,66 @@
 angular.module('statsApp', [])
     .controller('StatsController', ['$scope', '$interval', function($scope, $interval) {
 
+        $scope.races = [
+            {
+                label: "Human",
+                stats: {
+                    str : 1,
+                    dex : 1,
+                    con : 1,
+                    int : 1,
+                    wis : 1,
+                    cha : 1
+                }
+            },
+            {
+                label: "Human (Variant)",
+                stats: {}
+            },
+            {
+                label: "Elf (High)",
+                stats: {
+                    dex : 2,
+                    int : 1
+                }
+            },
+            {
+                label: "Elf (Wood)",
+                stats: {
+                    dex : 2,
+                    wis : 1
+                }
+            },
+            {
+                label: "Dwarf (Hill)",
+                stats: {
+                    con : 2,
+                    wis : 1
+                }
+            },
+            {
+                label: "Dwarf (Mountain)",
+                stats: {
+                    con : 2,
+                    str : 1
+                }
+            },
+            {
+                label: "Halfling (Stout)",
+                stats: {
+                    dex : 2,
+                    con : 1
+                }
+            },
+            {
+                label: "Halfling (Lightfoot)",
+                stats: {
+                    dex : 2,
+                    cha : 1
+                }
+            }
+        ];
+
         var recalc = function() {
 
             $scope.stats.str = bound($scope.stats.str);
@@ -18,6 +78,21 @@ angular.module('statsApp', [])
             $scope.points -= cost($scope.stats.int);
             $scope.points -= cost($scope.stats.wis);
             $scope.points -= cost($scope.stats.cha);
+
+            $scope.modifiedStats = {
+                str : $scope.stats.str,
+                dex : $scope.stats.dex,
+                con : $scope.stats.con,
+                int : $scope.stats.int,
+                wis : $scope.stats.wis,
+                cha : $scope.stats.cha
+            };
+
+            for(var stat in $scope.selectedRace.stats) {
+                if (typeof $scope.stats[stat] !== "undefined") {
+                    $scope.modifiedStats[stat] += $scope.selectedRace.stats[stat];
+                }
+            }
         };
 
         var bound = function(value) {
@@ -46,7 +121,16 @@ angular.module('statsApp', [])
         };
 
         $scope.reset = function() {
+            $scope.selectedRace = $scope.races[0];
             $scope.stats = {
+                str : 8,
+                dex : 8,
+                con : 8,
+                int : 8,
+                wis : 8,
+                cha : 8
+            };
+            $scope.modifiedStats = {
                 str : 8,
                 dex : 8,
                 con : 8,
@@ -71,5 +155,10 @@ angular.module('statsApp', [])
             }
         };
 
+        $scope.changeRace = function() {
+            recalc();
+        };
+
         $scope.reset();
+        recalc();
     }]);

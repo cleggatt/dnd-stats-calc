@@ -27,10 +27,32 @@
     <div class="container" ng-controller="StatsController">
         <div class="row">
             <div class="col-xs-3">
+                <select class="form-control" ng-options="race.label for race in races" ng-model="selectedRace" ng-model="selectedRace" ng-change="changeRace()"></select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1 col-xs-offset-3">
+                <p class="text-center">Base</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">Racial mod</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">Final</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-3">
                 <p class="lead">Strength</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.str}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.str}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.str}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('str')">
@@ -41,8 +63,14 @@
             <div class="col-xs-3">
                 <p class="lead">Dexterity</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.dex}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.dex}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.dex}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('dex')">
@@ -53,8 +81,14 @@
             <div class="col-xs-3">
                 <p class="lead">Constitution</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.con}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.con}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.con}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('con')">
@@ -65,8 +99,14 @@
             <div class="col-xs-3">
                 <p class="lead">Intelligence</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.int}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.int}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.int}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('int')">
@@ -77,8 +117,14 @@
             <div class="col-xs-3">
                 <p class="lead">Wisdom</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.wis}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.wis}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.wis}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('wis')">
@@ -89,8 +135,14 @@
             <div class="col-xs-3">
                 <p class="lead">Charisma</p>
             </div>
-            <div class="col-xs-3">
+            <div class="col-xs-1">
                 <p class="text-center lead">{{stats.cha}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center">{{selectedRace.stats.cha}}</p>
+            </div>
+            <div class="col-xs-1">
+                <p class="text-center lead">{{modifiedStats.cha}}</p>
             </div>
             <div class="col-xs-6">
                 <input class="btn btn-primary" type="button" value="Lower" ng-click="dec('cha')">
