@@ -3,6 +3,7 @@ angular.module('statsApp', [])
 
         $scope.races = [
             {
+                id: "human",
                 label: "Human",
                 stats: {
                     str: 1,
@@ -14,10 +15,12 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "human-variant",
                 label: "Human (Variant)",
                 stats: {}
             },
             {
+                id: "elf-high",
                 label: "Elf (High)",
                 stats: {
                     dex: 2,
@@ -25,6 +28,7 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "elf-wood",
                 label: "Elf (Wood)",
                 stats: {
                     dex: 2,
@@ -32,6 +36,7 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "dwarf-hill",
                 label: "Dwarf (Hill)",
                 stats: {
                     con: 2,
@@ -39,6 +44,7 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "dwarf-mountain",
                 label: "Dwarf (Mountain)",
                 stats: {
                     con: 2,
@@ -46,6 +52,7 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "halfing-stout",
                 label: "Halfling (Stout)",
                 stats: {
                     dex: 2,
@@ -53,6 +60,7 @@ angular.module('statsApp', [])
                 }
             },
             {
+                id: "halfing-lightfoot",
                 label: "Halfling (Lightfoot)",
                 stats: {
                     dex: 2,
@@ -61,7 +69,7 @@ angular.module('statsApp', [])
             }
         ];
 
-        var recalc = function () {
+        $scope.recalc = function () {
 
             $scope.stats.str = bound($scope.stats.str);
             $scope.stats.dex = bound($scope.stats.dex);
@@ -88,12 +96,17 @@ angular.module('statsApp', [])
                 cha: $scope.stats.cha
             };
 
-            for (var stat in $scope.selectedRace.stats) {
+            var bonusCount = 0;
+
+            var racialMods = ($scope.selectedRace.id == 'human-variant') ?  $scope.variantBonus : $scope.selectedRace.stats;
+            for (var stat in racialMods) {
                 if (typeof $scope.stats[stat] !== "undefined") {
-                    $scope.modifiedStats[stat] += $scope.selectedRace.stats[stat];
+                    $scope.modifiedStats[stat] += racialMods[stat];
+                    bonusCount += racialMods[stat];
                 }
             }
 
+            $scope.modError = ($scope.selectedRace.id == 'human-variant' && bonusCount > 2);
             $scope.mods = {
                 str: mod($scope.modifiedStats.str),
                 dex: mod($scope.modifiedStats.dex),
@@ -144,6 +157,15 @@ angular.module('statsApp', [])
 
         $scope.reset = function () {
             $scope.selectedRace = $scope.races[0];
+            $scope.variantBonus = {
+                str: 0,
+                dex: 0,
+                con: 0,
+                int: 0,
+                wis: 0,
+                cha: 0
+            };
+            $scope.modError = false;
             $scope.stats = {
                 str: 8,
                 dex: 8,
@@ -166,22 +188,21 @@ angular.module('statsApp', [])
         $scope.inc = function (stat) {
             if (typeof $scope.stats[stat] !== "undefined") {
                 $scope.stats[stat]++;
-                recalc();
+                $scope.recalc();
             }
         };
 
         $scope.dec = function (stat) {
             if (typeof $scope.stats[stat] !== "undefined") {
                 $scope.stats[stat]--;
-                recalc();
+                $scope.recalc();
             }
         };
 
         $scope.changeRace = function () {
-            recalc();
+            $scope.recalc();
         };
 
         $scope.reset();
-        recalc();
+        $scope.recalc();
     }]);
-

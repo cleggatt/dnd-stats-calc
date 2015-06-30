@@ -35,7 +35,7 @@
                 <p class="text-center">Base</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">Racial mod</p>
+                <p class="text-center" ng-class="modError ? 'error' : ''">Racial mod</p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center">Final</p>
@@ -52,7 +52,10 @@
                 <p class="text-center lead">{{stats.str}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.str}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.str" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.str}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.str}}</p>
@@ -73,7 +76,10 @@
                 <p class="text-center lead">{{stats.dex}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.dex}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.dex" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.dex}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.dex}}</p>
@@ -94,7 +100,10 @@
                 <p class="text-center lead">{{stats.con}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.con}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.con" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.con}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.con}}</p>
@@ -115,7 +124,10 @@
                 <p class="text-center lead">{{stats.int}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.int}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.int" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.int}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.int}}</p>
@@ -136,7 +148,10 @@
                 <p class="text-center lead">{{stats.wis}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.wis}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.wis" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.wis}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.wis}}</p>
@@ -157,7 +172,10 @@
                 <p class="text-center lead">{{stats.cha}}</p>
             </div>
             <div class="col-xs-1">
-                <p class="text-center">{{selectedRace.stats.cha}}</p>
+                <p class="text-center">
+                    <input ng-show="(selectedRace.id == 'human-variant')" type="checkbox" ng-change="recalc()" ng-model="variantBonus.cha" ng-true-value="1" ng-false-value="0" value="">
+                    {{selectedRace.stats.cha}}
+                </p>
             </div>
             <div class="col-xs-1">
                 <p class="text-center lead">{{modifiedStats.cha}}</p>
